@@ -1,55 +1,146 @@
-# 🌐 URL Shortener Microservice – AffordMed Campus Hiring Project
-
-A full-stack HTTP URL Shortener web application built for Afford Medical Technologies’ Campus Hiring Evaluation. It includes a Node.js backend microservice and a responsive React frontend with real-time analytics and robust logging — all designed under strict constraints.
+A production-ready HTTP URL Shortener microservice with a responsive React frontend built for the AffordMed Campus Hiring Evaluation.
 
 ---
 
-## 🚀 Features
+## ✨ Features
 
-### 🔧 Microservice (Backend)
-- ✅ Shorten long URLs with default or custom shortcodes
-- ✅ Set optional validity period (defaults to 30 minutes)
-- ✅ Globally unique shortcode generation
-- ✅ Smart redirection (e.g. `/abcd1` → full URL)
-- ✅ Analytics API: click count, referrer, location, timestamps
-- ✅ Fully RESTful API
-- ✅ Extensive logging (custom middleware used — no `console.log`)
-
-### 💻 React Frontend
-- ✅ Form to shorten up to 5 URLs concurrently
-- ✅ Client-side validation for URL format, integer validity
-- ✅ Supports optional custom shortcodes
-- ✅ Displays shortened URL + expiry info
-- ✅ Stats page with:
-  - Total clicks
-  - Timestamp of each click
-  - Referrer info
-  - Coarse geographical location
-- ✅ Built with Material UI (as required)
+- 🌐 Shorten long URLs with optional custom shortcode
+- 🕒 Optional validity (default 30 minutes)
+- 📊 Track click statistics: count, timestamp, referrer, coarse location
+- 🪵 Uses **custom logging middleware** (no `console.log`)
+- ⚙️ Backend in **Node.js + Express**
+- 💻 Frontend in **React + Material UI**
+- 🧠 In-memory storage (no database)
 
 ---
 
-## 🛠 Tech Stack
+## 📦 Backend API
 
-| Layer       | Technology               |
-|-------------|---------------------------|
-| Frontend    | React, Material UI        |
-| Backend     | Node.js, Express.js       |
-| Storage     | In-memory (no database used) |
-| Location    | IP-based Geo lookup (optional/faked if needed) |
-| Logging     | Custom Logging Middleware |
-| Deployment  | Runs locally on `localhost` only |
+### 🔸 POST `/shorturls`
 
----
+Creates a new shortened URL.
 
-## 🔗 API Endpoints
-
-### `POST /shorturls`
-Create a new short URL  
-**Request Body:**
+**Request body:**
 ```json
 {
-  "url": "https://example.com/long-url-path",
+  "url": "https://example.com/very/long/url",
   "validity": 30,
   "shortcode": "abcd1"
 }
+```
+
+**Response:**
+```json
+{
+  "shortLink": "http://localhost:5000/abcd1",
+  "expiry": "2025-01-01T00:30:00Z"
+}
+```
+
+---
+
+### 🔸 GET `/shorturls/:shortcode`
+
+Retrieves stats for a given shortcode.
+
+**Response:**
+```json
+{
+  "originalUrl": "https://example.com/very/long/url",
+  "createdAt": "2025-01-01T00:00:00Z",
+  "expiry": "2025-01-01T00:30:00Z",
+  "clicks": 5,
+  "clickData": [
+    {
+      "timestamp": "2025-01-01T00:15:00Z",
+      "referrer": "https://google.com",
+      "location": "India"
+    }
+  ]
+}
+```
+
+---
+
+## 🧪 How to Run Locally
+
+### 🔁 Clone this repo
+
+```bash
+git clone https://github.com/Varshini013/url-shortener-app.git
+cd url-shortener-app
+```
+
+---
+
+### 📦 Backend Setup
+
+```bash
+cd backend
+npm install
+node server.js
+# Runs at http://localhost:5000
+```
+
+---
+
+### 🌐 Frontend Setup
+
+Open a second terminal:
+
+```bash
+cd frontend
+npm install
+npm start
+# Runs at http://localhost:3000
+```
+
+---
+
+## 🗂️ Folder Structure
+
+```
+url-shortener-app/
+├── backend/
+│   ├── data/
+│   ├── middleware/
+│   ├── routes/
+│   ├── utils/
+│   ├── app.js
+│   ├── server.js
+│   └── package.json
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── App.js
+│   │   └── ...
+│   └── package.json
+├── README.md
+└── .gitignore
+```
+
+---
+
+## 📌 Notes
+
+- 🧠 No database used — in-memory only
+- 🪵 Custom logging middleware logs to `backend/log.txt`
+- 🛑 No `console.log` used
+- 🔐 No authentication — assumed pre-authorized users (per spec)
+- 🌐 Frontend consumes backend via REST APIs only
+
+---
+
+## 🧹 Improvements (Optional Ideas)
+
+- 🌍 Add persistent storage (MongoDB or SQLite)
+- 🗺️ Improve location accuracy using IP lookup APIs
+- 📁 Deploy on cloud (Render/Netlify/Heroku)
+
+---
+
+## 📧 Contact
+
+Built with ❤️ by **Varshini Gajula**   
+📍 Location: India
