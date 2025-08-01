@@ -1,4 +1,4 @@
-A production-ready HTTP URL Shortener microservice with a responsive React frontend built for the AffordMed Campus Hiring Evaluation.
+A production-ready HTTP URL Shortener microservice with a responsive React frontend built.
 
 ---
 
@@ -138,9 +138,3 @@ url-shortener-app/
 - 🗺️ Improve location accuracy using IP lookup APIs
 - 📁 Deploy on cloud (Render/Netlify/Heroku)
 
----
-
-## 📧 Contact
-
-Built with ❤️ by **Varshini Gajula**   
-📍 Location: India
